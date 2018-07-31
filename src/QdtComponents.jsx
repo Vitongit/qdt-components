@@ -66,15 +66,18 @@ const QdtComponents = class {
           let selectedArrayNotTrimmed = [];
 
           selectedArrayNotTrimmed = locSelected.split(',');
+          console.log('selectedArrayNotTrimmed = ', JSON.stringify(selectedArrayNotTrimmed));
           const selectedArrayTrimmed = [];
 
           for (let j = 0; j < selectedArrayNotTrimmed.length; j++) {
             selectedArrayTrimmed[j] = selectedArrayNotTrimmed[j].trim();
           }
+          console.log('selectedArrayTrimmed = ', JSON.stringify(selectedArrayTrimmed));
           if (selectedArrayTrimmed[0] == null) {
             let res = [];
             res = locSelected.split(',').map(item => parseInt(item, 10));
 
+            console.log('res array 1 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           } else if (selectedArrayTrimmed[0] === 'ALL') {
             qAppp.field(locField).selectAll();
@@ -84,7 +87,7 @@ const QdtComponents = class {
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
-            console.log('res array = ', res);
+            console.log('res array 2 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           }
         }
