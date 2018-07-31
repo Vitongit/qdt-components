@@ -56,6 +56,7 @@ const QdtComponents = class {
 
       const valuesFromLocalStorage = JSON.parse(selections);
 
+      console.log('setSelections step 1');
       console.log(`setSelections${JSON.stringify(valuesFromLocalStorage)}`);
 
       if (valuesFromLocalStorage !== null && valuesFromLocalStorage.length > 0) {
@@ -89,6 +90,7 @@ const QdtComponents = class {
       } else {
         qAppp.clearAll();
       }
+      console.log('setSelections step 2');
       console.log(`setSelections ${JSON.stringify(valuesFromLocalStorage)} and appId - ${qAppp.id}`);
     } catch (error) {
       console.log(error);
