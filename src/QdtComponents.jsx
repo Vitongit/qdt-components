@@ -84,6 +84,7 @@ const QdtComponents = class {
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
+            console.log('res array = ', res);
             qAppp.field(locField).selectValues(res, false, true);
           }
         }
