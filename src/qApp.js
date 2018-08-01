@@ -36,7 +36,7 @@ const qApp = async (config) => {
     return new Promise((resolve) => {
       window.require(['js/qlik'], (qlik) => {
         const app = qlik.openApp(config.appId, { ...config, isSecure: config.secure, prefix });
-        app.getList('SelectionObject', function (reply) {
+        /* app.getList('SelectionObject', function (reply) {
           let loc_selections = [];
           let j;
 
@@ -53,7 +53,7 @@ const qApp = async (config) => {
             // localStorage.setItem('lastQlikAppId', app.id);
           }
           loc_selections = [];
-        });
+        }); */
         resolve(app);
       });
     });
