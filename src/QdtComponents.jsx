@@ -77,7 +77,7 @@ const QdtComponents = class {
             let res = [];
             res = locSelected.split(',').map(item => parseInt(item, 10));
 
-            console.log('res array 1 = ', JSON.stringify(res));
+            console.log('field 1 = ', JSON.stringify(locField), 'res array 1 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           } else if (selectedArrayTrimmed[0] === 'ALL') {
             qAppp.field(locField).selectAll();
@@ -87,7 +87,7 @@ const QdtComponents = class {
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
-            console.log('res array 2 = ', JSON.stringify(res));
+            console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           }
         }
