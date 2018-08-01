@@ -85,11 +85,10 @@ const QdtComponents = class {
             const res = [];
 
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
-              res.push(selectedArrayTrimmed[k]);
-              // res.push({ qText: selectedArrayTrimmed[k] });
+              res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
-            qAppp.field(locField).selectValues(res, false, true);
+            qAppp.field(locField).selectValues(res, true, true);
           }
         }
       } else {
