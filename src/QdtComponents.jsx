@@ -88,7 +88,7 @@ const QdtComponents = class {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
-            qAppp.field(locField).selectValues(res, true, true);
+            qAppp.field(locField).selectValues(res, false, true);
           }
         }
       } else {
