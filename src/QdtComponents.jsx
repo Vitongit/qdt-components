@@ -21,7 +21,7 @@ const components = {
 
 function isNumber(n) {
   console.log('isNumber function of', n);
-  return !Number.isNaN(parseFloat(n));
+  return !Number.isNaN(parseFloat(n)) && Number.isFinite(parseFloat(n));
 }
 
 const QdtComponents = class {
