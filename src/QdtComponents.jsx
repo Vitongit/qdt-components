@@ -20,8 +20,8 @@ const components = {
 };
 
 function isNumber(n) {
-  console.log('isNumber function of ', n);
-  return !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
+  console.log('isNumber function of', n);
+  return !Number.isNaN(parseFloat(n));
 }
 
 const QdtComponents = class {
