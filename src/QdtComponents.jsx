@@ -85,7 +85,7 @@ const QdtComponents = class {
             const res = [];
 
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
-              res.push({ qNum: Number.parseInt(selectedArrayTrimmed[k], 10) });
+              res.push(Number.parseInt(selectedArrayTrimmed[k], 10));
             }
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
