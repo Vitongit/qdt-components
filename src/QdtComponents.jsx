@@ -19,6 +19,10 @@ const components = {
   QdtFilter, QdtTable, QdtViz, QdtSelectionToolbar, QdtKpi, QdtButton, QdtPicasso, QdtSearch, QdtCurrentSelections,
 };
 
+function isNumber(n) {
+  return !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
+}
+
 const QdtComponents = class {
   static picasso = {
     settings,
@@ -73,7 +77,7 @@ const QdtComponents = class {
             selectedArrayTrimmed[j] = selectedArrayNotTrimmed[j].trim();
           }
           console.log('selectedArrayTrimmed = ', JSON.stringify(selectedArrayTrimmed));
-          if (selectedArrayTrimmed[0] == null) {
+          if (isNumber(selectedArrayTrimmed[0])) {
             let res = [];
             res = locSelected.split(',').map(item => parseInt(item, 10));
 
@@ -85,7 +89,7 @@ const QdtComponents = class {
             const res = [];
 
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
-              res.push(Number.parseInt(selectedArrayTrimmed[k], 10));
+              res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
