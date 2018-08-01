@@ -20,6 +20,7 @@ const components = {
 };
 
 function isNumber(n) {
+  console.log('isNumber function of ', n);
   return !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
 }
 
@@ -77,6 +78,7 @@ const QdtComponents = class {
             selectedArrayTrimmed[j] = selectedArrayNotTrimmed[j].trim();
           }
           console.log('selectedArrayTrimmed = ', JSON.stringify(selectedArrayTrimmed));
+          console.log('selectedArrayTrimmed[0] = ', selectedArrayTrimmed[0], ' isNumber = ', isNumber(selectedArrayTrimmed[0]));
           if (isNumber(selectedArrayTrimmed[0])) {
             let res = [];
             res = locSelected.split(',').map(item => parseInt(item, 10));
