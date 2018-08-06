@@ -45,6 +45,7 @@ const qApp = async (config) => {
               field: reply.qSelectionObject.qSelections[j].qField,
               selected: reply.qSelectionObject.qSelections[j].qSelected
             });
+            console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
           }
 
           if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
