@@ -87,9 +87,9 @@ const QdtComponents = class {
             qAppp.field(locField).selectAll();
           } else if (selectedArrayTrimmed[0].substr(0, 4) === 'NOT ') {
             const res = [];
-            res.push(selectedArrayTrimmed[0].slice(4));
+            res.push({ qText: selectedArrayTrimmed[0].slice(4) });
             for (let k = 1; k < selectedArrayTrimmed.length; k++) {
-              res.push(selectedArrayTrimmed[k]);
+              res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field NOT = ', JSON.stringify(locField), 'res array NOT = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
