@@ -102,13 +102,14 @@ const QdtComponents = class {
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           }
-          qAppp.field(locField).clearOther(false);
-          qAppp.field(locField).lock();
+          // qAppp.field(locField).clearOther(false);
+          // qAppp.field(locField).lock();
         }
       } else {
-        // qAppp.clearAll();
-        qAppp.field('Год').clearOther(false);
-        qAppp.field('Год').clear();
+        qAppp.clearAll();
+        console.log('setSelections clearAll = ', JSON.stringify(valuesFromLocalStorage));
+        // qAppp.field('Год').clearOther(false);
+        // qAppp.field('Год').clear();
       }
       // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       console.log('setSelections step 2');
