@@ -82,7 +82,7 @@ const QdtComponents = class {
             let res = [];
             res = locSelected.split(',').map(item => parseInt(item, 10));
             console.log('field 1 = ', JSON.stringify(locField), 'res array 1 = ', JSON.stringify(res));
-            qAppp.field(locField).selectValues(JSON.stringify(res), false, true);
+            qAppp.field(locField).selectValues(res, false, true);
           } else if (selectedArrayTrimmed[0] === 'ALL') {
             qAppp.field(locField).selectAll();
           } else if (selectedArrayTrimmed[0].substr(0, 4) === 'NOT ') {
@@ -92,7 +92,7 @@ const QdtComponents = class {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field NOT = ', JSON.stringify(locField), 'res array NOT = ', JSON.stringify(res));
-            qAppp.field(locField).selectValues(JSON.stringify(res), false, true);
+            qAppp.field(locField).selectValues(res, false, true);
             qAppp.field(locField).selectExcluded();
           } else {
             const res = [];
@@ -100,7 +100,7 @@ const QdtComponents = class {
               res.push({ qText: selectedArrayTrimmed[k] });
             }
             console.log('field 2 = ', JSON.stringify(locField), 'res array 2 = ', JSON.stringify(res));
-            qAppp.field(locField).selectValues(JSON.stringify(res), false, true);
+            qAppp.field(locField).selectValues(res, false, true);
           }
         }
       } else {
