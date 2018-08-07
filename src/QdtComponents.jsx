@@ -106,7 +106,9 @@ const QdtComponents = class {
           qAppp.field(locField).lock();
         }
       } else {
-        qAppp.clearAll();
+        // qAppp.clearAll();
+        qAppp.field('Год').clearOther(false);
+        qAppp.field('Год').clear();
       }
       // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       console.log('setSelections step 2');
