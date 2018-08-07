@@ -85,13 +85,15 @@ const QdtComponents = class {
             qAppp.field(locField).selectValues(res, false, true);
           } else if (selectedArrayTrimmed[0] === 'ALL') {
             qAppp.field(locField).selectAll();
-          } else if (selectedArrayTrimmed[0].substr(0, 3) === 'NOT') {
+          } else if (selectedArrayTrimmed[0].substr(0, 4) === 'NOT ') {
             const res = [];
-            for (let k = 0; k < selectedArrayTrimmed.length; k++) {
+            res.push(selectedArrayTrimmed[0].slice(4));
+            for (let k = 1; k < selectedArrayTrimmed.length; k++) {
               res.push(selectedArrayTrimmed[k]);
             }
             console.log('field NOT = ', JSON.stringify(locField), 'res array NOT = ', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
+            qAppp.field(locField).selectExcluded();
           } else {
             const res = [];
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
