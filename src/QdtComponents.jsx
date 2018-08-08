@@ -109,11 +109,9 @@ const QdtComponents = class {
         }
       /* } else {
         qAppp.clearAll();
-        console.log('setSelections clearAll = ', JSON.stringify(valuesFromLocalStorage));
-        // qAppp.field('Год').clearOther(false);
-        // qAppp.field('Год').clear(); */
+        console.log('setSelections clearAll = ', JSON.stringify(valuesFromLocalStorage)); */
       }
-      valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
+      // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       console.log('setSelections step 2');
       console.log(`setSelections ${JSON.stringify(valuesFromLocalStorage)} and appId - ${qAppp.id}`);
     } catch (error) {
