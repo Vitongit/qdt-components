@@ -63,6 +63,8 @@ const QdtComponents = class {
       console.log('setSelections step 1');
       console.log(`setSelections${JSON.stringify(valuesFromLocalStorage)}`);
 
+      qAppp.clearAll();
+
       if (valuesFromLocalStorage !== null && valuesFromLocalStorage.length > 0) {
         for (let i = 0; i < valuesFromLocalStorage.length; i++) {
           const locField = valuesFromLocalStorage[i].field;
@@ -105,13 +107,13 @@ const QdtComponents = class {
           // qAppp.field(locField).clearOther(false);
           // qAppp.field(locField).lock();
         }
-      } else {
+      /* } else {
         qAppp.clearAll();
         console.log('setSelections clearAll = ', JSON.stringify(valuesFromLocalStorage));
         // qAppp.field('Год').clearOther(false);
-        // qAppp.field('Год').clear();
+        // qAppp.field('Год').clear(); */
       }
-      // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
+      valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       console.log('setSelections step 2');
       console.log(`setSelections ${JSON.stringify(valuesFromLocalStorage)} and appId - ${qAppp.id}`);
     } catch (error) {
