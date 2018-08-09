@@ -60,6 +60,10 @@ const qApp = async (config) => {
             // localStorage.setItem('lastQlikAppId', app.id);
             console.log('qdt set item = ', JSON.stringify(loc_selections));
           }
+          if (localStorage.getItem('selectSrc') === 'sidebar') {
+            localStorage.setItem('selectSrc', '');
+            console.log('selectSrc =');
+          }
           loc_selections = [];
         });
         resolve(app);
