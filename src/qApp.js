@@ -48,10 +48,15 @@ const qApp = async (config) => {
             console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
           }
 
-          if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
-            console.log('qdt set item = ', JSON.stringify(loc_selections));
-            localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
-            localStorage.setItem('lastQlikAppId', app.id);
+          if (localStorage.getItem('selectScr') !== 'onSidebarSelect') {
+            if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
+              console.log('qdt set item = ', JSON.stringify(loc_selections));
+              localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
+              localStorage.setItem('selectScr', 'onQdtSelect');
+              // localStorage.setItem('lastQlikAppId', app.id);
+            }
+          } else {
+            localStorage.setItem('selectScr', '');
           }
           loc_selections = [];
         });

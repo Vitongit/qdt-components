@@ -102,16 +102,16 @@ const QdtComponents = class {
             console.log('field 2 =', JSON.stringify(locField), 'res array 2 =', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
           }
-          qAppp.field(locField).clearOther(false);
-          qAppp.field(locField).lock();
-          console.log('lock field =', JSON.stringify(locField));
+          // qAppp.field(locField).clearOther(false).lock();
+          // qAppp.field(locField).lock();
+          // console.log('lock field =', JSON.stringify(locField));
         }
       } else {
         qAppp.clearAll();
         console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage));
       }
-      valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
-      valuesFromLocalStorage.forEach(item => console.log('unlock field =', JSON.stringify(item.field)));
+      // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
+      // valuesFromLocalStorage.forEach(item => console.log('unlock field =', JSON.stringify(item.field)));
       console.log('setSelections step 2');
       console.log(`setSelections ${JSON.stringify(valuesFromLocalStorage)} and appId - ${qAppp.id}`);
     } catch (error) {
