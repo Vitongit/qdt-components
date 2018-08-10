@@ -85,7 +85,7 @@ const QdtComponents = class {
             qAppp.field(locField).selectValues(res, false, true);
           } else if (selectedArrayTrimmed[0] === 'ALL') {
             qAppp.field(locField).selectAll();
-          } else if (selectedArrayTrimmed[0].substr(0, 4) === 'NOT ') {
+          /* } else if (selectedArrayTrimmed[0].substr(0, 4) === 'NOT ') {
             const res = [];
             res.push({ qText: selectedArrayTrimmed[0].slice(4) });
             for (let k = 1; k < selectedArrayTrimmed.length; k++) {
@@ -93,7 +93,7 @@ const QdtComponents = class {
             }
             console.log('field NOT =', JSON.stringify(locField), 'res array NOT =', JSON.stringify(res));
             qAppp.field(locField).selectValues(res, false, true);
-            qAppp.field(locField).selectExcluded();
+            qAppp.field(locField).selectExcluded(); */
           } else {
             const res = [];
             for (let k = 0; k < selectedArrayTrimmed.length; k++) {
@@ -107,8 +107,8 @@ const QdtComponents = class {
           // console.log('lock field =', JSON.stringify(locField));
         }
       } else {
-        qAppp.clearAll();
         console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage));
+        qAppp.clearAll();
       }
       // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       // valuesFromLocalStorage.forEach(item => console.log('unlock field =', JSON.stringify(item.field)));
