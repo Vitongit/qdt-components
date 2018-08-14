@@ -39,6 +39,7 @@ const qApp = async (config) => {
         app.getList('SelectionObject', function (reply) {
           let loc_selections = [];
           let j;
+          console.log('SelectionObject Reply 1');
 
           for (j = 0; j < reply.qSelectionObject.qSelections.length; j++) {
             loc_selections.push({
