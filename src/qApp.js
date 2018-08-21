@@ -41,29 +41,31 @@ const qApp = async (config) => {
           let j;
           console.log('SelectionObject Reply app =', app.id);
 
-          for (j = 0; j < reply.qSelectionObject.qSelections.length; j++) {
-            loc_selections.push({
-              field: reply.qSelectionObject.qSelections[j].qField,
-              selected: reply.qSelectionObject.qSelections[j].qSelected
-            });
-            console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
-          }
-
-          if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
-            if (localStorage.getItem('selectSrc') === 'sidebar') {
-              console.log('selectSrc = ; changed');
-              localStorage.setItem('selectSrc', '');
-            } else {
-              console.log('selectSrc = qlikobject');
-              localStorage.setItem('selectSrc', 'qlikobject');
+          if (localStorage.getItem('app') === app.id) {
+            for (j = 0; j < reply.qSelectionObject.qSelections.length; j++) {
+              loc_selections.push({
+                field: reply.qSelectionObject.qSelections[j].qField,
+                selected: reply.qSelectionObject.qSelections[j].qSelected
+              });
+              console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
             }
-            console.log('qdt set item = ', JSON.stringify(loc_selections));
-            localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
+
+            if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
+              if (localStorage.getItem('selectSrc') === 'sidebar') {
+                console.log('selectSrc = ; changed');
+                localStorage.setItem('selectSrc', '');
+              } else {
+                console.log('selectSrc = qlikobject');
+                localStorage.setItem('selectSrc', 'qlikobject');
+              }
+              console.log('qdt set item = ', JSON.stringify(loc_selections));
+              localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
             // localStorage.setItem('lastQlikAppId', app.id);
-          }
-          if (localStorage.getItem('selectSrc') === 'sidebar') {
-            console.log('selectSrc = ; not changed');
-            localStorage.setItem('selectSrc', '');
+            }
+            if (localStorage.getItem('selectSrc') === 'sidebar') {
+              console.log('selectSrc = ; not changed');
+              localStorage.setItem('selectSrc', '');
+            }
           }
           loc_selections = [];
         });
