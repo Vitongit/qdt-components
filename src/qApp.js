@@ -41,7 +41,7 @@ const qApp = async (config) => {
           let j;
           console.log('SelectionObject Reply app =', app);
 
-          if (localStorage.getItem('app') === app) {
+          if (localStorage.getItem('app') === app.id) {
             for (j = 0; j < reply.qSelectionObject.qSelections.length; j++) {
               loc_selections.push({
                 field: reply.qSelectionObject.qSelections[j].qField,
