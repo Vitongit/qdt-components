@@ -60,6 +60,9 @@ const QdtComponents = class {
 
       const valuesFromLocalStorage = JSON.parse(selections);
 
+      console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage));
+      qAppp.clearAll();
+
       console.log('setSelections step 1');
       console.log(`setSelections${JSON.stringify(valuesFromLocalStorage)}`);
 
@@ -106,9 +109,9 @@ const QdtComponents = class {
           // qAppp.field(locField).lock();
           // console.log('lock field =', JSON.stringify(locField));
         }
-      } else {
+      /* } else {
         console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage));
-        qAppp.clearAll();
+        qAppp.clearAll(); */
       }
       // valuesFromLocalStorage.forEach(item => qAppp.field(item.field).unlock());
       // valuesFromLocalStorage.forEach(item => console.log('unlock field =', JSON.stringify(item.field)));
