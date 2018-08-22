@@ -51,8 +51,8 @@ const qApp = async (config) => {
                 console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
               }
 
-              console.log('selectItemLocalStorage =', localStorage.getItem('selectItemLocalStorage'), 'loc_selections =', JSON.stringify(loc_selections));
               if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
+                console.log('selectItemLocalStorage =', localStorage.getItem('selectItemLocalStorage'), 'loc_selections =', JSON.stringify(loc_selections));
                 if (localStorage.getItem('selectSrc') === 'sidebar_set_val') {
                   console.log('selectSrc = ; changed');
                   localStorage.setItem('selectSrc', '');
