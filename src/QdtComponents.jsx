@@ -60,7 +60,8 @@ const QdtComponents = class {
 
       const valuesFromLocalStorage = JSON.parse(selections);
 
-      const appIdList = JSON.parse(localStorage.getItem('selectAppIdList'));
+      let appIdList = [];
+      if (localStorage.getItem('selectAppIdList') !== null) appIdList = JSON.parse(localStorage.getItem('selectAppIdList'));
       console.log('qAppp =', qAppp.id, 'appIdList =', appIdList);
 
       if (appIdList.find(value => value === qAppp.id) === undefined) {
