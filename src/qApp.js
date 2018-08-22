@@ -63,12 +63,13 @@ const qApp = async (config) => {
                 localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
                 // localStorage.setItem('lastQlikAppId', app.id);
               }
-              if (localStorage.getItem('selectSrc') === 'sidebar') {
+              if (localStorage.getItem('selectSrc') === 'sidebar_set_val') {
                 console.log('selectSrc = ; not changed');
                 localStorage.setItem('selectSrc', '');
               }
             }
           } else {
+            console.log('selectSrc = sidebar_set_val');
             localStorage.setItem('selectSrc', 'sidebar_set_val');
           }
           loc_selections = [];
