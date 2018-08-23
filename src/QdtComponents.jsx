@@ -62,19 +62,19 @@ const QdtComponents = class {
 
       let appIdList = [];
       if (localStorage.getItem('selectAppIdList') !== null) appIdList = JSON.parse(localStorage.getItem('selectAppIdList'));
-      console.log('qAppp =', qAppp.id, 'appIdList =', appIdList);
+      console.log('app =', qAppp.id, 'appIdList =', appIdList, 'find =', appIdList.find(value => value === qAppp.id));
 
-      if (appIdList.find(value => value === qAppp.id) === undefined) {
+      if (appIdList.find(value => value === qAppp.id) === null) {
         appIdList.push(qAppp.id);
         localStorage.setItem('selectAppIdList', JSON.stringify(appIdList));
         // console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage), 'selectSrc = sidebar_clear_all');
         // qAppp.clearAll();
 
-        if (localStorage.getItem('selectSrc') === 'sidebar') {
+        /* if (localStorage.getItem('selectSrc') === 'sidebar') {
           localStorage.setItem('selectSrc', 'sidebar_clear_all');
           console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage), 'selectSrc = sidebar_clear_all');
           qAppp.clearAll();
-        }
+        } */
 
         console.log('setSelections step 1');
         console.log(`setSelections${JSON.stringify(valuesFromLocalStorage)}`);
