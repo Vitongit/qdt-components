@@ -98,10 +98,10 @@ const QdtComponents = class {
           console.log('selectedArrayTrimmed[0] =', selectedArrayTrimmed[0], 'isNumber =', isNumber(selectedArrayTrimmed[0]));
           if (isNumber(selectedArrayTrimmed[0])) {
             const resnum = [];
-            // let selectedArrayNum = [];
-            // selectedArrayNum = locSelected.split(',').map(item => parseInt(item, 10));
-            for (let h = 0; h < selectedArrayTrimmed.length; h++) {
-              resnum.push({ qNum: selectedArrayTrimmed[h] });
+            let selectedArrayNum = [];
+            selectedArrayNum = selectedArrayTrimmed.split(',').map(item => parseInt(item, 10));
+            for (let h = 0; h < selectedArrayNum.length; h++) {
+              resnum.push({ qNum: selectedArrayNum[h] });
             }
             console.log('field 1 =', JSON.stringify(locField), 'res array 1 =', JSON.stringify(resnum));
             qAppp.field(locField).selectValues(resnum, false, true);
