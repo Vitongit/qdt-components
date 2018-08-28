@@ -1,4 +1,4 @@
-/* eslint-disable camelcase,prefer-arrow-callback,no-plusplus,comma-dangle */
+/* eslint-disable camelcase,prefer-arrow-callback,no-plusplus,comma-dangle,no-loop-func,no-undef */
 const loadCapabilityApis = async (config) => {
   try {
     const capabilityApisCSS = document.createElement('link');
@@ -23,6 +23,8 @@ const loadCapabilityApis = async (config) => {
   }
 };
 
+const fields = ['Год', 'Месяц', 'Год - Неделя', 'Неделя'];
+
 const qApp = async (config) => {
   try {
     await loadCapabilityApis(config);
@@ -36,44 +38,31 @@ const qApp = async (config) => {
     return new Promise((resolve) => {
       window.require(['js/qlik'], (qlik) => {
         const app = qlik.openApp(config.appId, { ...config, isSecure: config.secure, prefix });
-        app.getList('SelectionObject', function (reply) {
-          let loc_selections = [];
-          let j;
-          console.log('Reply SelectionObject app =', app.id);
-
-          // if (localStorage.getItem('selectSrc') !== 'sidebar_clear_all') {
-          // if (localStorage.getItem('app') === app.id) {
-          for (j = 0; j < reply.qSelectionObject.qSelections.length; j++) {
-            loc_selections.push({
-              field: reply.qSelectionObject.qSelections[j].qField,
-              selected: reply.qSelectionObject.qSelections[j].qSelected
+        app.getList('SelectionObject', function () {
+          for (let i = 0; i < fields.length; i++) {
+            app.createList({
+              qDef: {
+                qFieldDefs: [fields[i]] // set fieldname
+              },
+              qAutoSortByState: {
+                qDisplayNumberOfRows: 1
+              },
+              qInitialDataFetch: [{
+                qHeight: 1000, // can set number of rows returned
+                qWidth: 1
+              }]
+            }, function (reply) {
+              const rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+              const selected = rows.filter(function (row) {
+                return row.qState === 'S';
+              });
+              const values = [];
+              for (let j = 0; j < selected.length; j++) {
+                values.push(selected[j]);
+              }
+              localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
             });
-            console.log('qdt set item: lenght: ', j, ' loc_selections = ', JSON.stringify(loc_selections));
           }
-
-          if (localStorage.getItem('selectItemLocalStorage') !== JSON.stringify(loc_selections)) {
-            console.log('selectItemLocalStorage =', localStorage.getItem('selectItemLocalStorage'), 'loc_selections =', JSON.stringify(loc_selections));
-            if (localStorage.getItem('selectSrc') === 'sidebar') {
-              console.log('selectSrc = ; changed');
-              localStorage.setItem('selectSrc', '');
-            } else {
-              console.log('selectSrc = qlikobject');
-              localStorage.setItem('selectSrc', 'qlikobject');
-            }
-            console.log('qdt set item = ', JSON.stringify(loc_selections));
-            localStorage.setItem('selectItemLocalStorage', JSON.stringify(loc_selections));
-            // localStorage.setItem('lastQlikAppId', app.id);
-          }
-          if (localStorage.getItem('selectSrc') === 'sidebar') {
-            console.log('selectSrc = ; not changed');
-            localStorage.setItem('selectSrc', '');
-          }
-          /*  }
-          } else {
-            console.log('selectSrc = sidebar_set_val');
-            localStorage.setItem('selectSrc', 'sidebar_set_val');
-          } */
-          loc_selections = [];
         });
         resolve(app);
       });
