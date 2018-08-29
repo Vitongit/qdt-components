@@ -52,6 +52,8 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
+              console.log('reply:', reply.qListObject.qDataPages[0]);
+              console.debug('reply debug:', reply.qListObject.qDataPages[0]);
               const rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
               const selected = rows.filter(function (row) {
                 return row.qState === 'S';
@@ -62,15 +64,20 @@ const qApp = async (config) => {
               }
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
               if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
+                console.log('local storage =', localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle), 'values =', JSON.stringify(values));
                 if (localStorage.getItem('selectSrc') === 'sidebar') {
+                  console.log('selectSrc = ; values changed');
                   localStorage.setItem('selectSrc', '');
                 } else {
+                  console.log('selectSrc = qlikobject');
                   localStorage.setItem('selectSrc', 'qlikobject');
                 }
+                console.log('Qlik Object set local storage = ', JSON.stringify(values));
                 localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
                 // localStorage.setItem('lastQlikAppId', app.id);
               }
               if (localStorage.getItem('selectSrc') === 'sidebar') {
+                console.log('selectSrc = ; values not changed');
                 localStorage.setItem('selectSrc', '');
               }
             });

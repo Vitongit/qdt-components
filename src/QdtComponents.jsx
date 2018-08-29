@@ -61,18 +61,17 @@ const QdtComponents = class {
       const qAppp = await qAppPromise;
 
       const valuesFromLocalStorage = JSON.parse(selection);
-      console.log('setSelections valuesFromLocalStorage =', valuesFromLocalStorage, valuesFromLocalStorage.field, valuesFromLocalStorage.selected);
+      console.log('setSelections valuesFromLocalStorage =', valuesFromLocalStorage);
 
       if (valuesFromLocalStorage !== null) {
         const locField = valuesFromLocalStorage.field;
         const locSelected = JSON.parse(valuesFromLocalStorage.selected);
-        console.log('setSelections field =', locField, JSON.stringify(locField));
 
         if (locSelected === null) {
-          console.log('setSelections field =', JSON.stringify(locField), 'res array = null');
+          console.log('setSelections field =', locField, 'res array = null');
           qAppp.field(locField).clear();
         } else if (locSelected[0] === 'ALL') {
-          console.log('setSelections field =', JSON.stringify(locField), 'res array = selectAll');
+          console.log('setSelections field =', locField, 'res array = selectAll');
           qAppp.field(locField).selectAll();
         } else if (isNumber(locSelected[0])) {
           let res = [];
