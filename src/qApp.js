@@ -60,8 +60,8 @@ const qApp = async (config) => {
               for (let j = 0; j < selected.length; j++) {
                 values.push(selected[j].qText);
               }
-              localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
-              // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+              // localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
+              localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
             });
           }
         });
