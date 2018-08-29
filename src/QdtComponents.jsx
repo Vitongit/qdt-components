@@ -65,7 +65,8 @@ const QdtComponents = class {
 
       if (valuesFromLocalStorage !== null) {
         const locField = valuesFromLocalStorage.field;
-        const locSelected = valuesFromLocalStorage.selected;
+        let locSelected = [];
+        locSelected = valuesFromLocalStorage.selected;
         console.log('setSelections field selected =', locField, locSelected);
         console.log('setSelections selected item =', locSelected[0]);
 
