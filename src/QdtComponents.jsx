@@ -65,11 +65,8 @@ const QdtComponents = class {
 
       if (valuesFromLocalStorage !== null) {
         const locField = valuesFromLocalStorage.field;
-        let locSelected = [];
-        locSelected = JSON.parse(valuesFromLocalStorage.selected);
-        console.log('setSelections field selected =', locField, locSelected);
-        console.log('setSelections selected item =', locSelected[0]);
-        console.log('setSelections valuesFromLocalStorage selected item =', valuesFromLocalStorage.selected[0]);
+        const locSelected = JSON.parse(valuesFromLocalStorage.selected);
+        console.log('setSelections field =', locField, JSON.stringify(locField));
 
         if (locSelected === null) {
           console.log('setSelections field =', JSON.stringify(locField), 'res array = null');

@@ -60,8 +60,19 @@ const qApp = async (config) => {
               for (let j = 0; j < selected.length; j++) {
                 values.push(selected[j].qText);
               }
-              // localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
-              localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+              // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+              if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
+                if (localStorage.getItem('selectSrc') === 'sidebar') {
+                  localStorage.setItem('selectSrc', '');
+                } else {
+                  localStorage.setItem('selectSrc', 'qlikobject');
+                }
+                localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+                // localStorage.setItem('lastQlikAppId', app.id);
+              }
+              if (localStorage.getItem('selectSrc') === 'sidebar') {
+                localStorage.setItem('selectSrc', '');
+              }
             });
           }
         });
