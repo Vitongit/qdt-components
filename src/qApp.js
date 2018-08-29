@@ -58,9 +58,10 @@ const qApp = async (config) => {
               });
               const values = [];
               for (let j = 0; j < selected.length; j++) {
-                values.push(selected[j]);
+                values.push(selected[j].qText);
               }
-              localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
+              // localStorage.setItem(JSON.stringify(reply.qListObject.qDimensionInfo.qFallbackTitle), JSON.stringify(values));
+              localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
             });
           }
         });
