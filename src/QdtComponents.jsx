@@ -64,23 +64,25 @@ const QdtComponents = class {
       console.log('setSelections valuesFromLocalStorage =', valuesFromLocalStorage);
 
       if (valuesFromLocalStorage !== null) {
-        const [field, selected] = valuesFromLocalStorage;
-        console.log('setSelections field selected =', field, selected);
-        console.log('setSelections selected item =', selected[0]);
+        const locField = valuesFromLocalStorage.field;
+        const locSelected = valuesFromLocalStorage.selected;
 
-        if (selected[0] === 'ALL') {
-          console.log('setSelections field =', JSON.stringify(field), 'res array = selectAll');
-          qAppp.field(field).selectAll();
-        } else if (isNumber(selected[0])) {
+        if (locSelected === null) {
+          console.log('setSelections field =', JSON.stringify(locField), 'res array = null');
+          qAppp.field(locField).clear();
+        } else if (locSelected[0] === 'ALL') {
+          console.log('setSelections field =', JSON.stringify(locField), 'res array = selectAll');
+          qAppp.field(locField).selectAll();
+        } else if (isNumber(locSelected[0])) {
           let res = [];
-          res = selected.map(item => parseInt(item, 10));
-          console.log('setSelections field =', field, 'res array Numeric =', JSON.stringify(res));
-          qAppp.field(field).selectValues(res, false, true);
+          res = locSelected.map(item => parseInt(item, 10));
+          console.log('setSelections field =', locField, 'res array Numeric =', JSON.stringify(res));
+          qAppp.field(locField).selectValues(res, false, true);
         } else {
           const res = [];
-          selected.forEach(value => res.push({ qText: value }));
-          console.log('setSelections field =', field, 'res array =', JSON.stringify(res));
-          qAppp.field(field).selectValues(res, false, true);
+          locSelected.forEach(value => res.push({ qText: value }));
+          console.log('setSelections field =', locField, 'res array =', JSON.stringify(res));
+          qAppp.field(locField).selectValues(res, false, true);
         }
       } else {
         console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage));
