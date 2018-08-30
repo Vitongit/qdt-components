@@ -38,10 +38,9 @@ const qApp = async (config) => {
     return new Promise((resolve) => {
       window.require(['js/qlik'], (qlik) => {
         const app = qlik.openApp(config.appId, { ...config, isSecure: config.secure, prefix });
-        console.log('app:', app, app.id);
+        console.log('app:', app.id);
         app.getList('SelectionObject', function () {
           for (let i = 0; i < fields.length; i++) {
-            console.log('field:', fields[i]);
             app.createList({
               qDef: {
                 qFieldDefs: [fields[i]] // set fieldname
@@ -54,8 +53,7 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
-              console.log('reply 1:', reply.qListObject);
-              console.log('reply 2:', reply);
+              console.log('field:', fields[i], 'reply:', reply.qListObject);
               let rows = [];
               if (reply.qListObject.qDataPages.length > 0) {
                 rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
