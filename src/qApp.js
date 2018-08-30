@@ -41,6 +41,7 @@ const qApp = async (config) => {
         console.log('app:', app.id);
         app.getList('SelectionObject', function () {
           for (let i = 0; i < fields.length; i++) {
+            console.log('field:', fields[i]);
             app.createList({
               qDef: {
                 qFieldDefs: [fields[i]] // set fieldname
@@ -53,7 +54,7 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
-              console.log('field:', fields[i], 'reply:', reply.qListObject);
+              console.log('reply:', reply.qListObject);
               let rows = [];
               if (reply.qListObject.qDataPages.length > 0) {
                 rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
