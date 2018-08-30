@@ -52,11 +52,9 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
-              console.log('reply 1:', reply.qListObject.qDataPages[0]);
-              console.log('reply 2:', reply.qListObject.qDataPages);
-              console.log('reply 3:', reply.qListObject);
-              console.log('reply 4:', reply);
-              const rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+              console.log('reply:', reply.qListObject);
+              let rows = [];
+              if (reply.qListObject.qDataPages > 0) rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
               const selected = rows.filter(function (row) {
                 return row.qState === 'S';
               });
