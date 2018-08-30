@@ -54,7 +54,9 @@ const qApp = async (config) => {
             }, function (reply) {
               console.log('reply:', reply.qListObject);
               let rows = [];
-              if (reply.qListObject.qDataPages > 0) rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+              if (reply.qListObject.qDataPages.length > 0) {
+                rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+              }
               const selected = rows.filter(function (row) {
                 return row.qState === 'S';
               });
