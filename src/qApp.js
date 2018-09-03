@@ -56,7 +56,7 @@ const qApp = async (config) => {
                   qWidth: 1
                 }]
               }, function (reply) {
-                console.log('reply:', reply.qListObject, 'field:', fields[i], 'app:', app.id);
+                console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'field:', fields[i], 'app:', app.id);
                 let rows = [];
                 if (reply.qListObject.qDataPages.length > 0) {
                   rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
@@ -89,7 +89,7 @@ const qApp = async (config) => {
               });
             }
           } else {
-            console.log('selectSrc = sidebar_set_val');
+            console.log('selectSrc = sidebar_set_val', localStorage.getItem('selectSrc'));
             localStorage.setItem('selectSrc', 'sidebar_set_val');
           }
         });
