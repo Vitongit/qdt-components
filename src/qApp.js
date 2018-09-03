@@ -72,10 +72,10 @@ const qApp = async (config) => {
                 if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
                   console.log('local storage =', localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle), 'values =', JSON.stringify(values));
                   if (localStorage.getItem('selectSrc') === 'sidebar_set_val') {
-                    console.log('selectSrc = ; values changed');
+                    console.log('set selectSrc = ; values changed', localStorage.getItem('selectSrc'));
                     localStorage.setItem('selectSrc', '');
                   } else {
-                    console.log('selectSrc = qlikobject');
+                    console.log('set selectSrc = qlikobject', localStorage.getItem('selectSrc'));
                     localStorage.setItem('selectSrc', 'qlikobject');
                   }
                   console.log('Qlik Object set local storage = ', JSON.stringify(values));
@@ -83,13 +83,13 @@ const qApp = async (config) => {
                   // localStorage.setItem('lastQlikAppId', app.id);
                 }
                 if (localStorage.getItem('selectSrc') === 'sidebar_set_val') {
-                  console.log('selectSrc = ; values not changed');
+                  console.log('selectSrc = ; values not changed', localStorage.getItem('selectSrc'));
                   localStorage.setItem('selectSrc', '');
                 }
               });
             }
           } else {
-            // console.log('selectSrc = sidebar_set_val');
+            console.log('selectSrc = sidebar_set_val');
             localStorage.setItem('selectSrc', 'sidebar_set_val');
           }
         });
