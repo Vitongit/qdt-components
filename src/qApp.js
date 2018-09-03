@@ -39,6 +39,7 @@ const qApp = async (config) => {
       window.require(['js/qlik'], (qlik) => {
         const app = qlik.openApp(config.appId, { ...config, isSecure: config.secure, prefix });
         console.log('app:', app.id);
+
         app.getList('SelectionObject', function () {
           for (let i = 0; i < fields.length; i++) {
             console.log('field:', fields[i]);
@@ -54,7 +55,7 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
-              console.log('reply:', reply.qListObject);
+              console.log('reply:', reply.qListObject, 'field:', fields[i], 'app:', app.id);
               let rows = [];
               if (reply.qListObject.qDataPages.length > 0) {
                 rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
