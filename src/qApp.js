@@ -41,6 +41,7 @@ const qApp = async (config) => {
         console.log('app:', app.id);
 
         app.getList('SelectionObject', function () {
+          console.log('selectSrc =', localStorage.getItem('selectSrc'));
           if (localStorage.getItem('selectSrc') !== 'sidebar_clear_all') {
             for (let i = 0; i < fields.length; i++) {
               console.log('field:', fields[i]);
@@ -56,9 +57,10 @@ const qApp = async (config) => {
                   qWidth: 1
                 }]
               }, function (reply) {
-                console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'field:', fields[i], 'app:', app.id);
+                // console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'field:', fields[i], 'app:', app.id);
                 let rows = [];
                 if (reply.qListObject.qDataPages.length > 0) {
+                  console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'field:', fields[i], 'app:', app.id);
                   rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
                 }
                 const selected = rows.filter(function (row) {
