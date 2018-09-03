@@ -63,6 +63,12 @@ const QdtComponents = class {
       const valuesFromLocalStorage = JSON.parse(selection);
       console.log('setSelections valuesFromLocalStorage =', valuesFromLocalStorage);
 
+      if (localStorage.getItem('selectSrc') === 'sidebar') {
+        localStorage.setItem('selectSrc', 'sidebar_clear_all');
+        console.log('setSelections clearAll =', JSON.stringify(valuesFromLocalStorage), 'selectSrc = sidebar_clear_all');
+        qAppp.clearAll();
+      }
+
       if (valuesFromLocalStorage !== null) {
         const locField = valuesFromLocalStorage.field;
         const locSelected = JSON.parse(valuesFromLocalStorage.selected);
