@@ -74,7 +74,7 @@ const qApp = async (config) => {
 
               if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
                 console.log('local storage =', localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle), 'values =', JSON.stringify(values));
-                if (selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source === 'sidebar') {
+                if ((selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source || '') === 'sidebar') {
                   source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
                   console.log('selectSrc = ; values changed');
                   localStorage.setItem('selectSrc', JSON.stringify(source));
