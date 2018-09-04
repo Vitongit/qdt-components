@@ -81,7 +81,7 @@ const qApp = async (config) => {
                 } else {
                   source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: 'qlikobject' });
                   console.log('selectSrc = qlikobject');
-                  localStorage.setItem('selectSrc', 'source');
+                  localStorage.setItem('selectSrc', source);
                 }
                 console.log('Qlik Object set local storage = ', JSON.stringify(values));
                 localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
