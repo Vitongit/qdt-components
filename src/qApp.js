@@ -58,7 +58,7 @@ const qApp = async (config) => {
               }]
             }, function (reply) {
               // console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'field:', fields[i], 'app:', app.id);
-              console.log('selectSrc =', localStorage.getItem('selectSrc'));
+              console.log('reply selectSrc =', localStorage.getItem('selectSrc'));
               if (localStorage.getItem('selectSrc') !== 'sidebar_clear_all') {
                 let rows = [];
                 if (reply.qListObject.qDataPages.length > 0) {
