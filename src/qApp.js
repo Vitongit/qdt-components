@@ -69,7 +69,7 @@ const qApp = async (config) => {
               }
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
-              const selectSrc = JSON.parse(localStorage.getItem('selectSrc'));
+              const selectSrc = JSON.parse(localStorage.getItem('selectSrc')) || [];
               const source = selectSrc.filter(src => src.field !== reply.qListObject.qDimensionInfo.qFallbackTitle);
 
               if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
@@ -77,11 +77,11 @@ const qApp = async (config) => {
                 if (selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source === 'sidebar') {
                   source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
                   console.log('selectSrc = ; values changed');
-                  localStorage.setItem('selectSrc', source);
+                  localStorage.setItem('selectSrc', JSON.stringify(source));
                 } else {
                   source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: 'qlikobject' });
                   console.log('selectSrc = qlikobject');
-                  localStorage.setItem('selectSrc', source);
+                  localStorage.setItem('selectSrc', JSON.stringify(source));
                 }
                 console.log('Qlik Object set local storage = ', JSON.stringify(values));
                 localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
@@ -90,7 +90,7 @@ const qApp = async (config) => {
               if (selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source === 'sidebar') {
                 source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
                 console.log('selectSrc = ; values not changed');
-                localStorage.setItem('selectSrc', source);
+                localStorage.setItem('selectSrc', JSON.stringify(source));
               }
             });
           }
