@@ -55,7 +55,7 @@ const qApp = async (config) => {
                 qWidth: 1
               }]
             }, function (reply) {
-              console.log('reply:', reply.qListObject, 'field:', fields[i], 'app:', app.id);
+              console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'app:', app.id);
               let rows = [];
               if (reply.qListObject.qDataPages.length > 0) {
                 rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
@@ -70,14 +70,18 @@ const qApp = async (config) => {
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
+              console.log('fieldName =', fieldName);
               console.log('localStorage =', localStorage.getItem('selectSrc'), 'equal to empty', localStorage.getItem('selectSrc') === '', 'to null', localStorage.getItem('selectSrc') === null, 'to undefined', localStorage.getItem('selectSrc') === undefined);
-              // console.log('localStorage JSON.parse =', JSON.parse(localStorage.getItem('selectSrc')));
               const selectSrc = localStorage.getItem('selectSrc') !== '' ? JSON.parse(localStorage.getItem('selectSrc')) : [];
+              console.log('selectSrc =', selectSrc);
               const source = selectSrc.filter(src => src.field !== fieldName);
+              console.log('source =', source);
               const sourceCurVal = selectSrc.some(src => src.field === fieldName) ? selectSrc.find(src => src.field === fieldName).source : '';
+              console.log('sourceCurVal =', sourceCurVal);
 
+              console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
               if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
-                console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
+                // console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
                 if (sourceCurVal === 'sidebar') {
                   source.push({ field: fieldName, source: '' });
                   console.log('values changed, set selectSrc = , field =', fieldName);
