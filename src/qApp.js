@@ -72,7 +72,7 @@ const qApp = async (config) => {
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
               console.log('localStorage =', localStorage.getItem('selectSrc'));
               console.log('localStorage JSON.parse =', JSON.parse(localStorage.getItem('selectSrc')));
-              const selectSrc = JSON.parse(localStorage.getItem('selectSrc')) || [];
+              const selectSrc = localStorage.getItem('selectSrc') !== '' ? JSON.parse(localStorage.getItem('selectSrc')) : [];
               const source = selectSrc.filter(src => src.field !== fieldName);
               let sourceCurVal = '';
               if (selectSrc.some(src => src.field === fieldName)) sourceCurVal = selectSrc.find(src => src.field === fieldName).source;
