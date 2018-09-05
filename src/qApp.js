@@ -70,12 +70,11 @@ const qApp = async (config) => {
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
-              console.log('localStorage =', localStorage.getItem('selectSrc'), 'equal to empty', localStorage.getItem('selectSrc') !== '', 'to null', localStorage.getItem('selectSrc') !== null, 'to undefined', localStorage.getItem('selectSrc') !== undefined);
+              console.log('localStorage =', localStorage.getItem('selectSrc'), 'equal to empty', localStorage.getItem('selectSrc') === '', 'to null', localStorage.getItem('selectSrc') === null, 'to undefined', localStorage.getItem('selectSrc') === undefined);
               // console.log('localStorage JSON.parse =', JSON.parse(localStorage.getItem('selectSrc')));
               const selectSrc = localStorage.getItem('selectSrc') !== '' ? JSON.parse(localStorage.getItem('selectSrc')) : [];
               const source = selectSrc.filter(src => src.field !== fieldName);
-              let sourceCurVal = '';
-              if (selectSrc.some(src => src.field === fieldName)) sourceCurVal = selectSrc.find(src => src.field === fieldName).source;
+              const sourceCurVal = selectSrc.some(src => src.field === fieldName) ? selectSrc.find(src => src.field === fieldName).source : '';
 
               if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
                 console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
