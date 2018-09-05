@@ -87,7 +87,7 @@ const qApp = async (config) => {
                 localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
                 // localStorage.setItem('lastQlikAppId', app.id);
               }
-              if (selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source === 'sidebar') {
+              if ((selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source || '') === 'sidebar') {
                 source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
                 console.log('selectSrc = ; values not changed');
                 localStorage.setItem('selectSrc', JSON.stringify(source));
