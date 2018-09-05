@@ -69,27 +69,28 @@ const qApp = async (config) => {
               }
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+              const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
               const selectSrc = JSON.parse(localStorage.getItem('selectSrc')) || [];
-              const source = selectSrc.filter(src => src.field !== reply.qListObject.qDimensionInfo.qFallbackTitle);
+              const source = selectSrc.filter(src => src.field !== fieldName);
+              let sourceCurVal = '';
+              if (selectSrc.some(src => src.field === fieldName)) sourceCurVal = selectSrc.find(src => src.field === fieldName).source;
 
-              if (localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle) !== JSON.stringify(values)) {
-                console.log('local storage =', localStorage.getItem(reply.qListObject.qDimensionInfo.qFallbackTitle), 'values =', JSON.stringify(values));
-                if ((selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source || '') === 'sidebar') {
-                  source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
-                  console.log('selectSrc = ; values changed');
-                  localStorage.setItem('selectSrc', JSON.stringify(source));
+              if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
+                console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
+                if (sourceCurVal === 'sidebar') {
+                  source.push({ field: fieldName, source: '' });
+                  console.log('values changed, set selectSrc = , field =', fieldName);
                 } else {
-                  source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: 'qlikobject' });
-                  console.log('selectSrc = qlikobject');
-                  localStorage.setItem('selectSrc', JSON.stringify(source));
+                  source.push({ field: fieldName, source: 'qlikobject' });
+                  console.log('values changed, set selectSrc = qlikobject, field =', fieldName);
                 }
+                localStorage.setItem('selectSrc', JSON.stringify(source));
                 console.log('Qlik Object set local storage = ', JSON.stringify(values));
-                localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+                localStorage.setItem(fieldName, JSON.stringify(values));
                 // localStorage.setItem('lastQlikAppId', app.id);
-              }
-              if ((selectSrc.find(src => src.field === reply.qListObject.qDimensionInfo.qFallbackTitle).source || '') === 'sidebar') {
-                source.push({ field: reply.qListObject.qDimensionInfo.qFallbackTitle, source: '' });
-                console.log('selectSrc = ; values not changed');
+              } else if (sourceCurVal === 'sidebar') {
+                source.push({ field: fieldName, source: '' });
+                console.log('values changed, set selectSrc = , field =', fieldName);
                 localStorage.setItem('selectSrc', JSON.stringify(source));
               }
             });
