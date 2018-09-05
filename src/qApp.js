@@ -70,9 +70,9 @@ const qApp = async (config) => {
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
-              const selectSrc = JSON.parse(localStorage.getItem('selectSrc')) || [];
               console.log('localStorage =', localStorage.getItem('selectSrc'));
               console.log('localStorage JSON.parse =', JSON.parse(localStorage.getItem('selectSrc')));
+              const selectSrc = JSON.parse(localStorage.getItem('selectSrc')) || [];
               const source = selectSrc.filter(src => src.field !== fieldName);
               let sourceCurVal = '';
               if (selectSrc.some(src => src.field === fieldName)) sourceCurVal = selectSrc.find(src => src.field === fieldName).source;
