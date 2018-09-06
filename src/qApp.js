@@ -71,37 +71,21 @@ const qApp = async (config) => {
 
               // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
-              console.log('fieldName =', fieldName);
-              console.log('localStorage =', localStorage.getItem(fieldName), 'equal to empty', localStorage.getItem(fieldName) === '', 'to null', localStorage.getItem(fieldName) === null, 'to undefined', localStorage.getItem(fieldName) === undefined);
-              const valuesLS = (localStorage.getItem(fieldName) !== '') && (localStorage.getItem(fieldName) !== null) ? JSON.parse(localStorage.getItem(fieldName))[0] : { selected: '', source: '' };
-              console.log('valuesLS =', valuesLS);
-              console.log('valuesLS selected =', valuesLS.selected);
-              console.log('valuesLS source 1 =', valuesLS.source);
-              /* console.log('localStorage =', localStorage.getItem('selectSrc'), 'equal to empty', localStorage.getItem('selectSrc') === '', 'to null', localStorage.getItem('selectSrc') === null, 'to undefined', localStorage.getItem('selectSrc') === undefined);
-              const selectSrc = (localStorage.getItem('selectSrc') !== '') || (localStorage.getItem('selectSrc') !== null) ? JSON.parse(localStorage.getItem('selectSrc')) : [];
-              console.log('selectSrc =', selectSrc);
-              const source = selectSrc.filter(src => src.field !== fieldName);
-                console.log('source =', source);
-              const sourceCurVal = selectSrc.some(src => src.field === fieldName) ? selectSrc.find(src => src.field === fieldName).source : '';
-                console.log('sourceCurVal =', sourceCurVal); */
-
-              const select = [];
-              if (valuesLS.selected !== JSON.stringify(values)) {
-                // console.log('local storage =', valuesLS.selected, 'values =', JSON.stringify(values));
-                if (valuesLS.source === 'sidebar') {
-                  select.push({ selected: JSON.stringify(values), source: '' });
-                  console.log('values changed, set selectSrc = , field =', fieldName);
+              if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
+                console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
+                if (localStorage.getItem('selectSrc') === 'sidebar') {
+                  console.log('set selectSrc = ; values changed', localStorage.getItem('selectSrc'));
+                  localStorage.setItem('selectSrc', '');
                 } else {
-                  select.push({ selected: JSON.stringify(values), source: 'qlikobject' });
-                  console.log('values changed, set selectSrc = qlikobject, field =', fieldName);
+                  console.log('set selectSrc = qlikobject', localStorage.getItem('selectSrc'));
+                  localStorage.setItem('selectSrc', 'qlikobject');
                 }
                 console.log('Qlik Object set local storage = ', JSON.stringify(values));
-                localStorage.setItem(fieldName, JSON.stringify(select));
+                localStorage.setItem(fieldName, JSON.stringify(values));
                 // localStorage.setItem('lastQlikAppId', app.id);
-              } else if (valuesLS.source === 'sidebar') {
-                select.push({ selected: JSON.stringify(values), source: '' });
-                console.log('values changed, set selectSrc = , field =', fieldName);
-                localStorage.setItem(fieldName, JSON.stringify(select));
+              } else if (localStorage.getItem('selectSrc') === 'sidebar') {
+                console.log('selectSrc = ; values not changed', localStorage.getItem('selectSrc'));
+                localStorage.setItem('selectSrc', '');
               }
             });
           }
