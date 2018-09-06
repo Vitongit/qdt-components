@@ -73,12 +73,10 @@ const qApp = async (config) => {
               const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
               console.log('fieldName =', fieldName);
               console.log('localStorage =', localStorage.getItem(fieldName), 'equal to empty', localStorage.getItem(fieldName) === '', 'to null', localStorage.getItem(fieldName) === null, 'to undefined', localStorage.getItem(fieldName) === undefined);
-              const valuesLS = (localStorage.getItem(fieldName) !== '') && (localStorage.getItem(fieldName) !== null) ? JSON.parse(localStorage.getItem(fieldName)) : [{ selected: '', source: '' }];
+              const valuesLS = (localStorage.getItem(fieldName) !== '') && (localStorage.getItem(fieldName) !== null) ? JSON.parse(localStorage.getItem(fieldName))[0] : { selected: '', source: '' };
               console.log('valuesLS =', valuesLS);
-              console.log('valuesLS =', valuesLS, valuesLS.selected);
               console.log('valuesLS selected =', valuesLS.selected);
               console.log('valuesLS source 1 =', valuesLS.source);
-              console.log('valuesLS source 2 =', valuesLS[0].source);
               /* console.log('localStorage =', localStorage.getItem('selectSrc'), 'equal to empty', localStorage.getItem('selectSrc') === '', 'to null', localStorage.getItem('selectSrc') === null, 'to undefined', localStorage.getItem('selectSrc') === undefined);
               const selectSrc = (localStorage.getItem('selectSrc') !== '') || (localStorage.getItem('selectSrc') !== null) ? JSON.parse(localStorage.getItem('selectSrc')) : [];
               console.log('selectSrc =', selectSrc);
