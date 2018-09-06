@@ -60,7 +60,6 @@ const QdtComponents = class {
       const { qAppPromise } = this;
       const qAppp = await qAppPromise;
 
-      console.log('setSelections selection =', selection);
       const valuesFromLocalStorage = JSON.parse(selection);
       console.log('setSelections valuesFromLocalStorage =', valuesFromLocalStorage);
 
