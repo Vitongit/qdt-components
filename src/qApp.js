@@ -23,7 +23,7 @@ const loadCapabilityApis = async (config) => {
   }
 };
 
-const fields = ['Год', 'Месяц', 'Год - Неделя', 'Неделя'];
+const fields = ['Год', 'Месяц', 'Месяц-год', 'Неделя'];
 
 const qApp = async (config) => {
   try {
