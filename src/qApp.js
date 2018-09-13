@@ -23,7 +23,8 @@ const loadCapabilityApis = async (config) => {
   }
 };
 
-const fields = ['Год', 'Месяц', 'Месяц-год', 'Неделя'];
+const fields = ['Год', 'Месяц-год', 'Месяц'];
+// const fields = ['Год', 'Месяц-год', 'Месяц', 'Неделя-год', 'Неделя', 'День месяца', 'День недели', 'Дата', 'Товарная группа 1', 'Товарная группа 2', 'Товарная группа 3', 'Товарная группа 4', 'Товарная группа 5', 'Номенклатура', 'Статус номенклатуры', 'Производитель', 'Тип номенклатуры', 'Артикул', 'СЕ Группа 1', 'СЕ Группа 2', 'СЕ Группа 3', 'СЕ Группа 4', 'Структурные единицы', 'Тип структурной единицы', 'Регион', 'Формат', 'Категория цен', 'Поставщик', 'Конкурент', 'Мероприятие', 'Акция', 'Тип оплаты', 'Кассир', 'Касса'];
 
 const qApp = async (config) => {
   try {
@@ -38,58 +39,47 @@ const qApp = async (config) => {
     return new Promise((resolve) => {
       window.require(['js/qlik'], (qlik) => {
         const app = qlik.openApp(config.appId, { ...config, isSecure: config.secure, prefix });
-        console.log('app:', app.id);
-
-        app.getList('SelectionObject', function () {
-          for (let i = 0; i < fields.length; i++) {
-            console.log('field:', fields[i]);
-            app.createList({
-              qDef: {
-                qFieldDefs: [fields[i]] // set fieldname
-              },
-              qAutoSortByState: {
-                qDisplayNumberOfRows: 1
-              },
-              qInitialDataFetch: [{
-                qHeight: 1000, // can set number of rows returned
-                qWidth: 1
-              }]
-            }, function (reply) {
-              // console.log('reply:', reply.qListObject, 'app:', app.id);
-              let rows = [];
-              if (reply.qListObject.qDataPages.length > 0) {
-                console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'app:', app.id);
-                rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
-              }
-              const selected = rows.filter(function (row) {
-                return row.qState === 'S';
-              });
-              const values = [];
-              for (let j = 0; j < selected.length; j++) {
-                values.push(selected[j].qText);
-              }
-
-              // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
-              const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
-              if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
-                console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
-                if (localStorage.getItem('selectSrc') === 'sidebar') {
-                  console.log('set selectSrc = ; values changed', localStorage.getItem('selectSrc'));
-                  localStorage.setItem('selectSrc', '');
-                } else {
-                  console.log('set selectSrc = qlikobject', localStorage.getItem('selectSrc'));
-                  localStorage.setItem('selectSrc', 'qlikobject');
-                }
-                console.log('Qlik Object set local storage = ', JSON.stringify(values));
-                localStorage.setItem(fieldName, JSON.stringify(values));
-                // localStorage.setItem('lastQlikAppId', app.id);
-              } else if (localStorage.getItem('selectSrc') === 'sidebar') {
-                console.log('selectSrc = ; values not changed', localStorage.getItem('selectSrc'));
-                localStorage.setItem('selectSrc', '');
-              }
+        for (let i = 0; i < fields.length; i++) {
+          console.log('field:', fields[i]);
+          app.createList({
+            qDef: {
+              qFieldDefs: [fields[i]] // set fieldname
+            },
+            qAutoSortByState: {
+              qDisplayNumberOfRows: 1
+            },
+            qInitialDataFetch: [{
+              qHeight: 1000, // can set number of rows returned
+              qWidth: 1
+            }]
+          }, function (reply) {
+            let rows = [];
+            if (reply.qListObject.qDataPages.length > 0) {
+              rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+            }
+            const selected = rows.filter(function (row) {
+              return row.qState === 'S';
             });
-          }
-        });
+            const values = [];
+            for (let j = 0; j < selected.length; j++) {
+              values.push(selected[j].qText);
+            }
+
+            // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
+            const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
+            if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
+              if (localStorage.getItem('selectSrc') === 'sidebar') {
+                localStorage.setItem('selectSrc', '');
+              } else {
+                localStorage.setItem('selectSrc', 'qlikobject');
+              }
+              localStorage.setItem(fieldName, JSON.stringify(values));
+              // localStorage.setItem('lastQlikAppId', app.id);
+            } else if (localStorage.getItem('selectSrc') === 'sidebar') {
+              localStorage.setItem('selectSrc', '');
+            }
+          });
+        }
         resolve(app);
       });
     });
