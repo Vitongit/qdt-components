@@ -23,8 +23,7 @@ const loadCapabilityApis = async (config) => {
   }
 };
 
-const fields = ['Год', 'Месяц-год', 'Месяц'];
-// const fields = ['Год', 'Месяц-год', 'Месяц', 'Неделя-год', 'Неделя', 'День месяца', 'День недели', 'Дата', 'Товарная группа 1', 'Товарная группа 2', 'Товарная группа 3', 'Товарная группа 4', 'Товарная группа 5', 'Номенклатура', 'Статус номенклатуры', 'Производитель', 'Тип номенклатуры', 'Артикул', 'СЕ Группа 1', 'СЕ Группа 2', 'СЕ Группа 3', 'СЕ Группа 4', 'Структурные единицы', 'Тип структурной единицы', 'Регион', 'Формат', 'Категория цен', 'Поставщик', 'Конкурент', 'Мероприятие', 'Акция', 'Тип оплаты', 'Кассир', 'Касса'];
+const fields = ['Год', 'Месяц', 'Месяц-год', 'Неделя'];
 
 const qApp = async (config) => {
   try {
@@ -53,8 +52,10 @@ const qApp = async (config) => {
               qWidth: 1
             }]
           }, function (reply) {
+            // console.log('reply:', reply.qListObject, 'app:', app.id);
             let rows = [];
             if (reply.qListObject.qDataPages.length > 0) {
+              console.log('reply:', JSON.stringify(reply.qListObject.qDataPages[0].qMatrix), 'app:', app.id);
               rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
             }
             const selected = rows.filter(function (row) {
@@ -68,15 +69,8 @@ const qApp = async (config) => {
             // localStorage.setItem(reply.qListObject.qDimensionInfo.qFallbackTitle, JSON.stringify(values));
             const fieldName = reply.qListObject.qDimensionInfo.qFallbackTitle;
             if (localStorage.getItem(fieldName) !== JSON.stringify(values)) {
-              if (localStorage.getItem('selectSrc') === 'sidebar') {
-                localStorage.setItem('selectSrc', '');
-              } else {
-                localStorage.setItem('selectSrc', 'qlikobject');
-              }
+              console.log('local storage =', localStorage.getItem(fieldName), 'values =', JSON.stringify(values));
               localStorage.setItem(fieldName, JSON.stringify(values));
-              // localStorage.setItem('lastQlikAppId', app.id);
-            } else if (localStorage.getItem('selectSrc') === 'sidebar') {
-              localStorage.setItem('selectSrc', '');
             }
           });
         }
